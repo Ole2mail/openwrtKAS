@@ -1,0 +1,58 @@
+header:
+  version: 17
+  includes:
+    - ./templates/bblayers.conf.yml
+    - ./templates/local-v2-nolink.conf.yml
+
+distro: nodistro
+target: openwrt-image-full 
+env:
+  TCLIBC: musl
+
+repos:
+  meta-openwrt:
+    url: "https://github.com/kraj/meta-openwrt.git"
+    branch: "kirkstone"
+
+  meta-openembedded:
+    url: "https://git.openembedded.org/meta-openembedded"
+    branch: "kirkstone"
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+
+  oe-core:
+    url: "https://git.openembedded.org/openembedded-core"
+    branch: "kirkstone"
+    layers:
+      meta:
+
+  meta-linaro:
+    url: "https://git.linaro.org/openembedded/meta-linaro.git"
+    #    url: "https://github.com/linaro-mmwg/meta-linaro.git"
+    branch: "kirkstone"
+    layers:
+      meta-aarch64:
+      meta-ilp32:
+      meta-linaro:
+      meta-linaro-integration:
+
+        #  linaro-toolchain-latest:
+        #    url: "https://github.com/rokibhasansagar/linaro-toolchain-latest.git"
+        #    branch: "latest-7"
+        #    layers:
+        #      bitbake: excluded
+
+  bitbake:
+    url: "https://github.com/openembedded/bitbake.git"
+    branch: "2.0"
+    layers:
+      bitbake: excluded
+
+local_conf_header:
+  meta-custom: |
+    require ${TOPDIR}/../kas/templates/qemu-arm64-cortexa57.conf
+    require ${TOPDIR}/../kas/templates/local-shared-download.conf
+    #    require ${TOPDIR}/../kas/templates/external-linaro.conf
+    INHERIT += " openwrt-distro-defaults "

@@ -1,0 +1,4 @@
+local_conf_header:
+  meta-custom: |
+    MACHINE = "qemuarm64"
+    TUNE_FEATURES = "aarch64 cortexa57 crc crypto"

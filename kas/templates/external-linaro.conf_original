@@ -1,0 +1,3 @@
+TCMODE = "external-linaro"
+ELT_TARGET_SYS = "arm-linux-gnueabihf"
+EXTERNAL_TOOLCHAIN = "../linaro-toolchain-latest"

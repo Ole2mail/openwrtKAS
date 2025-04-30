@@ -1,0 +1,3 @@
+local_conf_header:
+  meta-custom: |
+    DL_DIR = "/data/downloads"

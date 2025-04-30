@@ -1,0 +1,48 @@
+header:
+  version: 17
+  includes:
+    - ./templates/bblayers.conf.yml
+    - ./templates/local-v2-nolink.conf.yml
+
+distro: nodistro
+target: openwrt-image-full 
+env:
+  TCLIBC: musl
+
+repos:
+  meta-openwrt:
+    url: "https://github.com/kraj/meta-openwrt.git"
+    branch: "kirkstone"
+
+  meta-openembedded:
+    url: "https://git.openembedded.org/meta-openembedded"
+    branch: "kirkstone"
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+
+  oe-core:
+    url: "https://git.openembedded.org/openembedded-core"
+    branch: "kirkstone"
+    layers:
+      meta:
+
+  meta-arm:
+    url: "https://git.yoctoproject.org/meta-arm"
+    branch: "kirkstone"
+    layers:
+      meta-arm:
+      meta-arm-toolchain:
+
+  bitbake:
+    url: "https://github.com/openembedded/bitbake.git"
+    branch: "2.0"
+    layers:
+      bitbake: excluded
+
+local_conf_header:
+  meta-custom: |
+    require ${TOPDIR}/../kas/templates/qemu-arm64-cortexa57.conf
+    require ${TOPDIR}/../kas/templates/local-shared-download.conf
+    INHERIT += " openwrt-distro-defaults "
